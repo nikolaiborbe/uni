@@ -96,8 +96,6 @@ def close_condition(input) -> None:
         close()
         
 
-# if current_state == State.CLOSE run this functino
-# TODO: Build function
 def close() -> None:
     """
     Closing sequence for the program.  
