@@ -1,3 +1,4 @@
+import argparse
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
@@ -5,8 +6,7 @@ import csv
 with open("data.csv", mode="r") as file:
     reader = csv.reader(file, delimiter=";")
     data   = [row for row in reader]
-    
-print(data)
+
 genders     = [sublist[0] for sublist in data]
 fag_info    = [sublist[2] for sublist in data]
 itgk_info   = [sublist[3] for sublist in data]
@@ -28,7 +28,6 @@ def plot_gender():
     plt.legend()
     plt.show()
 
-
 def main_plt():
     cat = ["Menn", "Kvinner", "Ikke-binære", "Fag", "ITGK"]
     values = [tot_g, tot_j, tot_bi, antall_fag, antall_itgk]
@@ -36,5 +35,18 @@ def main_plt():
     plt.ylabel("Antall")
     plt.show()
 
-main_plt()
+def run_function(func_name, args):
+    if func_name in globals():
+        func = globals()[func_name]
+        func(*args)  
+    else:
+        print(f"Function {func_name} does not exist.")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Run functions from the command line.")
+    parser.add_argument("plot_gender", type=str, help="Pie chart over genders in study.")
+    parser.add_argument("main_plt", nargs="*", help="")
     
+    args = parser.parse_args()
+
+    run_function(args.function, args.args)
