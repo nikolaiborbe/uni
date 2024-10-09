@@ -1,0 +1,10 @@
+{
+    "settings": {
+		"python.analysis.typeCheckingMode": "strict",
+		"python.linting.pylintEnabled": true,
+		"python.linting.enabled": true,
+		"python.formatting.provider": "black",
+		"python.formatting.blackArgs": ["--line-length", "79"], // Customize if needed
+		"python.pythonPath": "$Uni/venv/bin/python" // Ensure this points to your venv's Python interpreter
+	}
+}
