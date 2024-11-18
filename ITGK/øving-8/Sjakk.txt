@@ -1,0 +1,9 @@
+P� fritiden min de siste 2 ukene har jeg jobbet med et "Bitboard" sjakk engine i C.
+All logikken som er i bruk per nåer skrevet i Python, men logikken, regler, og 
+lagring av data skal overføres til C
+
+Prosjektet finner du her: https://github.com/Nikolai-Grytvik-Borbe/Chess-Engine
+Dette vil kontinuerlig oppdaters fremover. I alle fall til jeg blir lei.
+
+Prosjektet skal være godt dokumentet (README.md) om det er ønskelig åøve å gjøre
+spillet.
