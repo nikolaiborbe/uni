@@ -4,8 +4,9 @@ def count(words, letter):
     for i in words:
         if i[0] == i[-1] == letter:
             n += 1
-    
+
     return n
+
 
 # 7.
 def legal(age, booze, wine, beer):
@@ -39,18 +40,24 @@ def legal(age, booze, wine, beer):
                 if beer <= 2:
                     return True
     return False
-            
-            
+
+
 # 8.
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 def f():
     return
+
+
 def g():
     return
+
+
 def h():
     return
+
 
 fig, ax = plt.subplots()
 x = np.linspace(-4, 3, 3)
@@ -60,6 +67,7 @@ ax.plot(x, f(x))
 x = np.linspace(-3, 3, 100)
 ax.plot(x, h(x))
 plt.show()
+
 
 # 9.
 def calc_prize(string):
@@ -73,6 +81,7 @@ def calc_prize(string):
         reward = prizes["C"]
     return reward
 
+
 # 10.
 def name_sets(name_list):
     fi_n, la_n, init = {}, {}, {}
@@ -83,8 +92,10 @@ def name_sets(name_list):
         init.add(names[0][0] + names[1][0])
     return fi_n, la_n, init
 
+
 def dual_use_names(first_names, last_names):
     return first_names.last_names
+
 
 # 11.
 def convert(filename):
@@ -95,6 +106,7 @@ def convert(filename):
     new_name = names[0] + "_conv." + names[1]
     np.savetxt(new_name, b)
 
+
 # 12.
 def remove_even_nos(d):
     for key in list(d):
@@ -103,8 +115,8 @@ def remove_even_nos(d):
                 del d[key][i]
         if len(d[key]) == 0:
             del d[key]
-        
-        
+
+
 def even_nos_removed(d):
     new_d = {}
     for key in d:
@@ -116,19 +128,19 @@ def even_nos_removed(d):
             new_d[key] = new_val
     return new_d
 
+
 # 13. -> 2
 # TODO:
 def diagonal(a):
     result = []
-    n_rows, n_cols = a.shape # returns (2, 2) for a 2x2 matrix
+    n_rows, n_cols = a.shape  # returns (2, 2) for a 2x2 matrix
     n_diags = n_rows + n_cols - 1
     for d in range(n_diags):
         if d < n_rows:
             i = 0
             j = n_rows
-            
 
-        
+
 # 14.
 def poitns(throw):
     if throw == [1, 2, 3, 4, 5, 6]:
@@ -139,19 +151,20 @@ def poitns(throw):
         score = 1500
     else:
         score = 0
-        for n in set(throw): # n = number
-            ct = throw.count(n) # ct -> amount of dices with same side
+        for n in set(throw):  # n = number
+            ct = throw.count(n)  # ct -> amount of dices with same side
             if ct >= 3:
-                multi = 2**(ct-3)
+                multi = 2 ** (ct - 3)
                 if n == 1:
                     score += 1000 * multi
                 else:
-                    n*100*multi
+                    n * 100 * multi
             elif n == 1:
-                score += ct*100
+                score += ct * 100
             elif n == 5:
                 score += ct * 50
     return score
+
 
 # 15.
 def n_crossings(f, g, x_values):
@@ -167,24 +180,27 @@ def n_crossings(f, g, x_values):
             big, small = g, f
     return result
 
+
 # 16.
 def test__crossings(f, g, a, b):
     h = 1
     results = [n_crossings(f, g, x_values)]
 
-    while len(results) < 3 or results[-3:] != [results[-3]]*3:
-        x_values = np.arange(a, b + h/2, h)
+    while len(results) < 3 or results[-3:] != [results[-3]] * 3:
+        x_values = np.arange(a, b + h / 2, h)
         results.append(n_crossings(f, g, x_values))
-        h /=10
+        h /= 10
 
     return results
+
 
 # 17.
 def len_diff(num1, num2):
     return len(str(num1)) - len(str(num2))
 
+
 def show_division(n, m):
-    result = str(n//m)
+    result = str(n // m)
     division_string = f"{n} : {m} = {result}"
     indent = ""
     num = n
@@ -192,12 +208,13 @@ def show_division(n, m):
         subtr = int(digit) * m
         division_string += f"\n{indent}-{subtr}"
         division_string += f"\n{indent}----"
-        new_num = num - subtr * 10**len(diff(num, subtr))
-        indent += ""*len(diff(num, subtr)) # TODO:
+        new_num = num - subtr * 10 ** len(diff(num, subtr))
+        indent += "" * len(diff(num, subtr))  # TODO:
         num = new_num
         division_string += f"\n{indednt}{num}"
     division_string += " i rest\n"
     return division_string
+
 
 # 18.
 def same_row_col(a, b, n=0):
@@ -218,4 +235,3 @@ def same_row_col(a, b, n=0):
             found += 1
             count = 0
             continue
-            

@@ -73,7 +73,7 @@ def check_if_game_over(board):
                 return True
 
     # diagonal (bottom-left to top-right)
-    for row in range(height-1, 2, -1):
+    for row in range(height - 1, 2, -1):
         for col in range(width - 3):
             if (
                 board[row][col] != "*"
@@ -91,7 +91,6 @@ def check_if_game_over(board):
     return True
 
 
-
 def save_game(game, filepath="connect_4.txt"):
     out = ""
     for row in game:
@@ -101,6 +100,7 @@ def save_game(game, filepath="connect_4.txt"):
 
     with open(filepath, "w") as f:
         f.write(out)
+
 
 test = [
     ["*", "*", "*", "*", "*", "*", "*"],

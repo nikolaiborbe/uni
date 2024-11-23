@@ -2,11 +2,13 @@ board = []
 forsok = 10
 current_round = 0
 
+
 def lagbrett(forsok):
     global board
     guess = ["*", "*", "*", "*"]
     for i in range(forsok):
         board.append(guess)
+
 
 def skrivut(board):
     step = 0
@@ -19,17 +21,21 @@ def skrivut(board):
                 print("")
                 step = 0
 
+
 import random
+
+
 def nykombinasjon():
-    possible_picks = ['R', 'O', 'B', 'G', "GR", "RO"]
+    possible_picks = ["R", "O", "B", "G", "GR", "RO"]
     guess = []
     for i in range(4):
         guess.append(possible_picks[random.randint(0, len(possible_picks) - 1)])
-    
+
     return guess
 
+
 def lesinn():
-    possible_picks = ['R', 'O', 'B', 'G', "GR", "RO"]
+    possible_picks = ["R", "O", "B", "G", "GR", "RO"]
     print("Possible picks: ", possible_picks)
     out = []
     while len(out) < 4:
@@ -65,7 +71,7 @@ def evaluer(gjett, fasit):
             white += 1
             gjett_brukt[i] = True
             fasit_brukt[i] = True
-        
+
     for i in range(len(gjett)):
         if not gjett_brukt[i]:
             for j in range(len(fasit)):
@@ -73,18 +79,18 @@ def evaluer(gjett, fasit):
                     black += 1
                     fasit_brukt[i] = True
                     gjett_brukt[j] = True
-                    
-        
-
 
     if white == 4:
         print("Du har vunnet")
         return
-    
-    print(f"{white} rett farge på rett plass (hvit) og {black} rett farge på fail plass (sort)")
+
+    print(
+        f"{white} rett farge på rett plass (hvit) og {black} rett farge på fail plass (sort)"
+    )
+
 
 lagbrett(forsok)
 
 gjett = ["R", "O", "O", "B"]
 fasit = ["R", "R", "B", "B"]
-evaluer(gjett,fasit)
+evaluer(gjett, fasit)
