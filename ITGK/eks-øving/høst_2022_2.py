@@ -119,9 +119,101 @@ x = np.linspace(-3, 3, 100)
 ax.plot(x, g(x))
 plt.show()
 
+
 # 13
 def card_no(card):
     if card[1] in "JQKA":
         return "1" + "JQKA".find(card[1])
     else:
         return int(card[1:])
+
+
+# 14
+def sorted_cards(hand):
+    kinds = {}
+    for card in hand:
+        if card[0] in kinds:
+            kinds[card[0]].append(card_no(card))
+        else:
+            kinds[card[0]] = [card_no(card)]
+    for k in kinds:
+        kinds[k].sort()
+    return kinds
+
+
+def n_plays(cards):
+    n = 0
+    for kind in cards:
+        n += 1
+        for i in range(len(cards[kind])):
+            if cards[kind][i] > cards[kind][i - 1] + 1:
+                n += 1
+
+
+# 15
+def strict_larger(f, g, x_values):
+    result = True
+    for x in x_values:
+        if f(x) < g(x):
+            result = False
+            break
+    return result
+    
+# 16
+def longest_larger(f, g, x_values):
+    start = end = None
+    long = (start, end)
+    for x in x_values:
+        if f(x) > g(x):
+            if start == None:
+                start = end = x
+            if (long[0] == None or x - start > long[1] - long[0]):
+                long = (x_values[0], x_values[-1])
+        else:
+            start = end = None
+    return long
+
+# 17
+import numpy as np
+def income_tax(income):
+    threshholds = np.array((190350, 0, 0, 0, 0))
+    rates = np.array((1,2, 3, 4, 5, 6))
+    amounts = np.zeros(len(rates))
+    for i in range(-1, -len(rates)-1, -1):
+        if amounts[i] > thresholds[i]:
+            amounts[i] = (income - threasholds[i]) * rates[i]
+            income = income - threasholds[i]
+    return np.sum(amounts)
+
+# 18
+def sum_near_whole(A):
+    rows = len(A)
+    cols = len(A[0])
+    tot = 0
+    for i in range(len(A)):
+        for j in range(len(A[i])):
+            item_above = max(0, i-1)
+            item_below = min(rows, i+1)
+            item_right = max(0, j-1)
+            item_left = min(cols, j+1)
+
+            if A[i,j] == int(A[i, j]):
+                try:
+                    tot += A[item_above, j]
+                except IndexError:
+                    pass
+                try:
+                    tot += A[item_below, j]
+                except IndexError:
+                    pass
+                try:
+                    tot += A[i, item_right]
+                except IndexError:
+                    pass
+                try:
+                    tot += A[i, item_left]
+                except IndexError:
+                    pass
+    return tot
+                    
+
