@@ -1,0 +1,6 @@
+Lag1;Lag2:2-1
+Lag2;Lag3:0-0
+Lag1;Lag3:1-2
+Lag3;Lag1:0-1
+Lag2;Lag1:1-1
+Lag2;Lag1:4-2
