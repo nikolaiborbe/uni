@@ -1,8 +1,10 @@
+from winreg import KEY_QUERY_VALUE
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
 PATH_TO_DATA_FILE = "data.csv"
+DATA_PERCISION = 10
 
 # Constants
 MEW_0 = 1.26e-6 # magnetic constant (T*m/A)
@@ -29,45 +31,30 @@ def målt_magnetflukstetthet_b1(data) -> list:
     """
     return [1, 2, 3] # TODO: get the correct data row
 
-
-class Eksperiment1:
-    def __init__(self, N=100):
+class Eksperiment:
+    def __init__(self, PATH_TO_DATA_FILE, DATA_PERCISION):
         self.data_path = PATH_TO_DATA_FILE
+        self.percission = DATA_PERCISION
         # self.data = get_data_csv(self.data_path)
+        self.data = [1, 2, 3]
         # self.measured_magnetic_flux_density = målt_magnetflukstetthet(self.data)
-        self.measured_magnetic_flux_density = [i for i in range(N)]
-        self.data = []
+        self.measured_magnetic_flux_density = [i for i in range(self.percission)]
 
-    def add_data(self, data):
-        self.data.append(data)
-
-    def make_table(self, x1=-.20, x2=.20, I=1, R=0.07, N=100):
-        x_vals = np.linspace(x1, x2, N)
+    def make_table_b1(self, x1, x2, N: int, I: int, R: int):
+        x_vals = np.linspace(x1, x2, self.percission)
         beregnet_magnetflukstetthet = [magnetflukstetthet(x, N, I, R) for x in x_vals]
 
         d = {
             "Posisjon (cm):": x_vals,
             "Beregnet Magnetflukstettheten (T)": beregnet_magnetflukstetthet,
-            **{f"Målt Magnetflukstettheten (T) ({i})": self.data[i] for i in range(len(self.data))},
-            **{f"Avvik (%) ({i})": [((b - m)/m)*100 for b, m in zip(beregnet_magnetflukstetthet, self.data[i])] for i in range(len(self.data))}
+            "Målt Magnetflukstettheten (T)": self.measured_magnetic_flux_density,
+            "Avvik (%)": [((b - m)/m)*100 for b, m in zip(beregnet_magnetflukstetthet, self.measured_magnetic_flux_density)]
         }
         df = pd.DataFrame(data=d)
-        print(df)
-    
-class Eksperiment2:
-    def __init__(self, N=100):
-        self.data_path = PATH_TO_DATA_FILE
-        # self.data = get_data_csv(self.data_path)
-        self.data = [1, 2, 3]
-        # self.measured_magnetic_flux_density = målt_magnetflukstetthet(self.data)
-        self.measured_magnetic_flux_density = [i for i in range(N)]
-        self.data = []
+        return df, x_vals, beregnet_magnetflukstetthet
 
-    def add_data(self, data):
-        self.data.append(data)
-
-    def make_table(self, x1, x2, I: int, R: int, N=100):
-        x_vals = np.linspace(x1, x2, N)
+    def make_table_b2(self, x1, x2, N: int, I: int, R: int):
+        x_vals = np.linspace(x1, x2, self.percission)
         y1 = [helmoholtzspoler(x, N, I, R, 2*R) for x in x_vals]
         y2 = [helmoholtzspoler(x, N, I, R, R) for x in x_vals]
         y3 = [helmoholtzspoler(x, N, I, R, R/2) for x in x_vals]
@@ -84,20 +71,8 @@ class Eksperiment2:
         y_vals = [y1, y2, y3]
         return df, x_vals, y_vals
 
-class Eksperiment3:
-    def __init__(self, N=100):
-        self.data_path = PATH_TO_DATA_FILE
-        # self.data = get_data_csv(self.data_path)
-        self.data = [1, 2, 3]
-        # self.measured_magnetic_flux_density = målt_magnetflukstetthet(self.data)
-        self.measured_magnetic_flux_density = [i for i in range(N)]
-        self.data = []
-
-    def add_data(self, data):
-        self.data.append(data)
-    
-    def make_table(self, x1, x2,  I: int, R: int, N=100):
-        x_vals = np.linspace(x1, x2, N)
+    def make_table_b3(self, x1, x2, N: int, I: int, R: int):
+        x_vals = np.linspace(x1, x2, self.percission)
         y1 = [anti_helmoholtzspoler(x, N, I, R, 2*R) for x in x_vals]
         y2 = [anti_helmoholtzspoler(x, N, I, R, R) for x in x_vals]
         y3 = [anti_helmoholtzspoler(x, N, I, R, R/2) for x in x_vals]
@@ -114,9 +89,10 @@ class Eksperiment3:
         y_vals = [y1, y2, y3]
         return df, x_vals, y_vals
 
+
 if __name__ == "__main__":
-    exp1 = Eksperiment1(N=5)
-    exp1.add_data([1, 2, 3, 4, 1])
-    exp1.add_data([3, 2, 1, 5,1 ])
-    exp1.add_data([1, 4, 1, 5, 1])
-    exp1.make_table()
+
+    exp1 = Eksperiment(PATH_TO_DATA_FILE, DATA_PERCISION)
+    df1, x1, y1 = exp1.make_table_b1(0, 10, 100, 1, 1)
+
+
