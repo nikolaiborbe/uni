@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 PATH_TO_DATA_FILE = "data.csv"
-DATA_PERCISION = 10
+DATA_PERCISION = 100 
 
 # Constants
 MEW_0 = 1.26e-6 # magnetic constant (T*m/A)
@@ -48,7 +48,7 @@ class Eksperiment:
             "Posisjon (cm):": x_vals,
             "Beregnet Magnetflukstettheten (T)": beregnet_magnetflukstetthet,
             "Målt Magnetflukstettheten (T)": self.measured_magnetic_flux_density,
-            "Avvik (%)": [((b - m)/m)*100 for b, m in zip(beregnet_magnetflukstetthet, self.measured_magnetic_flux_density)]
+            # "Avvik (%)": [((b - m)/m)*100 for b, m in zip(beregnet_magnetflukstetthet, self.measured_magnetic_flux_density)]
         }
         df = pd.DataFrame(data=d)
         return df, x_vals, beregnet_magnetflukstetthet
@@ -93,6 +93,9 @@ class Eksperiment:
 if __name__ == "__main__":
 
     exp1 = Eksperiment(PATH_TO_DATA_FILE, DATA_PERCISION)
-    df1, x1, y1 = exp1.make_table_b1(0, 10, 100, 1, 1)
+    df1, x1, y1 = exp1.make_table_b1(-.2, 0.2, 100, 1, 1)
+    print(df1)
+    plt.plot(x1, y1, label='Beregnet')
+    plt.show()
 
 

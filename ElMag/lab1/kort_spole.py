@@ -13,8 +13,8 @@ def B_felt_kort_spole(x):
     return prefaktor*(1.0 +(x/R)**2)**(-1.5)
 
 def main():
-    filnavn= 'kort_spole.csv'
-    data =np.loadtxt(filnavn, delimiter=',')
+    filnavn= 'data/kort_spole.csv'
+    data =np.loadtxt(filnavn, delimiter=',', encoding="utf-8-sig", skiprows=1)
     xe =data[:, 0]-x0   #posisjon,sentrertrundtx0
     Be =data[:, 1]      #m˚aledata
 
@@ -24,7 +24,7 @@ def main():
 
     #Plotresultatene
     plt.plot(xb,Bb, label='Beregnet')
-    plt.plot(xe,Be, '.',label='M˚aledata')
+    plt.plot(xe,Be, '.',label='Måledata')
     plt.xlabel('Avstandfra senterav spolen(m)')
     plt.ylabel('Magnetfelt(Gauss)')
     plt.legend()
