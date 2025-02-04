@@ -19,6 +19,9 @@ def get_data(file_path):
     return x, y
 
 def main():
+    usikkerhet = 2+4.2572e-6
+
+
     x1, y1 = get_data("data/anti-helmholtzspoler/2R.csv")
     x2, y2 = get_data("data/anti-helmholtzspoler/R_2.csv")
     x3, y3 = get_data("data/anti-helmholtzspoler/R.csv")
@@ -33,7 +36,7 @@ def main():
     plt.plot(xb-0.6,Bb1, label='Beregnet 1')
     plt.plot(xb-0.6,Bb2, label='Beregnet 1')
     plt.plot(xb-0.6,Bb3, label='Beregnet 1')
-    plt.plot(x1,y1, '.',label='Måledata')
+    plt.errorbar(x1,y1, yerr=usikkerhet ,label='Måledata')
     plt.plot(x2,y2, '.',label='Måledata')
     plt.plot(x3,y3, '.',label='Måledata')
     plt.xlabel('Avstandfra senterav spolen(m)')
