@@ -12,13 +12,15 @@ def Helmholtzspoler(x, a):
     return (N*mu_0*I0)/(2*R) * (1 + (x - a/2)**2/R**2)**(-3/2) + (N*mu_0*I0)/(2*R) * (1 + (x + a/2)**2/R**2)**(-3/2)
 
 def get_data(file_path):
-    data =np.loadtxt(filnavn, delimiter=',', encoding="utf-8-sig",)
+    data =np.loadtxt(file_path, delimiter=',', encoding="utf-8-sig",)
     x =data[:, 0]-x0   #posisjon,sentrertrundtx0
     y =data[:, 1]      #m˚aledata
     return x, y
 
 def main():
-    x1, y1 = get_data("data/helmholtzspoler/data1.csv")
+    x1, y1 = get_data("data/helmholtzspoler/2R.csv")
+    x1, y1 = get_data("data/helmholtzspoler/R_2.csv")
+    x1, y1 = get_data("data/helmholtzspoler/R.csv")
 
     #BeregnB-feltet
     xb =np.linspace(x1[0],x1[-1], 100)  #fleredatapunkter
