@@ -8,8 +8,9 @@ mu_0 =4.0*np.pi*1e-7 #[H/m] permeabilitetitomtrom
 R =0.07 #[m]radius
 x0 =0.400 #[m]sentrumavspolen
 
-def Helmholtzspoler(x, a):
-    return (N*mu_0*I0)/(2*R) * (1 + (x - a/2)**2/R**2)**(-3/2) + (N*mu_0*I0)/(2*R) * (1 + (x + a/2)**2/R**2)**(-3/2)
+def anti_Helmholtzspoler(x, a):
+    const = N*mu_0*I0/(2*R)
+    return const * ((1+(x-a/2)**2/(R**2))**-(3/2) - (1+(x+a/2)**2/(R**2))**-(3/2))
 
 def get_data(file_path):
     data =np.loadtxt(file_path, delimiter=',', encoding="utf-8-sig", skiprows=1)
@@ -18,15 +19,15 @@ def get_data(file_path):
     return x, y
 
 def main():
-    x1, y1 = get_data("data/helmholtzspoler/2R.csv")
-    x2, y2 = get_data("data/helmholtzspoler/R_2.csv")
-    x3, y3 = get_data("data/helmholtzspoler/R.csv")
+    x1, y1 = get_data("data/anti-helmholtzspoler/2R.csv")
+    x2, y2 = get_data("data/anti-helmholtzspoler/R_2.csv")
+    x3, y3 = get_data("data/anti-helmholtzspoler/R.csv")
 
     #BeregnB-feltet
     xb =np.linspace(-0.2, .2, 100)  #fleredatapunkter
-    Bb1 = [Helmholtzspoler(x, R*2)*1e4 for x in xb]      #beregnetB-felt(Gauss)
-    Bb2 = [Helmholtzspoler(x, R)*1e4 for x in xb]      #beregnetB-felt(Gauss)
-    Bb3 = [Helmholtzspoler(x, R/2)*1e4 for x in xb]      #beregnetB-felt(Gauss)
+    Bb1 = [anti_Helmholtzspoler(x, R*2)*1e4 for x in xb]      #beregnetB-felt(Gauss)
+    Bb2 = [anti_Helmholtzspoler(x, R)*1e4 for x in xb]      #beregnetB-felt(Gauss)
+    Bb3 = [anti_Helmholtzspoler(x, R/2)*1e4 for x in xb]      #beregnetB-felt(Gauss)
 
     #Plotresultatene
     plt.plot(xb-0.6,Bb1, label='Beregnet 1')
