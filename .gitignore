@@ -1,1 +1,6 @@
 /venv
+/node
+/.vscode
+/.ipynb_checkpoints
+/node_modules
+.py
