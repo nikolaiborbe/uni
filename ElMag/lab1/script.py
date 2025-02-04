@@ -1,4 +1,4 @@
-with open("data/kort_spole.csv", "r") as file:
+with open("data/data.csv", "r") as file:
     lines = file.readlines()
 
 with open("output.csv", "w") as file:
