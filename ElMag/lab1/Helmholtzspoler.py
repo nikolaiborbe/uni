@@ -29,7 +29,6 @@ def main():
     Bb2 = [Helmholtzspoler(x, R)*1e4 for x in xb]      #beregnetB-felt(Gauss)
     Bb3 = [Helmholtzspoler(x, R/2)*1e4 for x in xb]      #beregnetB-felt(Gauss)
 
-    #Plotresultatene
     plt.plot(xb-0.6,Bb1, label='Beregnet 1')
     plt.plot(xb-0.6,Bb2, label='Beregnet 1')
     plt.plot(xb-0.6,Bb3, label='Beregnet 1')
