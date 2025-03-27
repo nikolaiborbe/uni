@@ -5,14 +5,15 @@ def calculate_inklinasjon(B_x, B_y, B_z):
     I = np.atan(B_z / np.sqrt(B_x**2 + B_y**2))
     return I
 
-def main():
-    data = np.genfromtxt("data.csv", delimiter=",", skip_header=1)
+type Filepath = str
+
+def print_ink(filepath: Filepath = "data.csv"):
+    data = np.genfromtxt(filepath, delimiter=",", skip_header=1)
     B_y = data[:, 1]
     B_x = data[:, 2]
     B_z = data[:, 3]
     
     D = calculate_inklinasjon(B_x, B_y, B_z)
-    print(pd.DataFrame(D))
     
     mean_D = np.degrees(np.mean(D))
     std_D = np.degrees(np.std(D, ddof=1))
@@ -23,5 +24,5 @@ def main():
     print(f"Relative uncertainty = {relative_uncertainty:.4%}")
 
 if __name__ == "__main__":
-    main()
+    print_ink("data.csv")
 
