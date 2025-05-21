@@ -1,0 +1,3 @@
+- [x] Potensialfunksjon (finne løsninger F = ∇f).
+- [x] Integrere over posisjonvektorer.
+- [x] Test meg selv på Gauss, Stokes, og Green oppgave. 
