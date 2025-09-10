@@ -52,6 +52,7 @@ class Opg1:
 
 class Opg2:
     def __init__(self):
+
         f_x = np.array([0.05, 0.10, 0.25, 0.40, 0.15, 0.05])
         E_x = sum([i * f_x[i] for i in range(len(f_x))])  # >>> 2.650
 
