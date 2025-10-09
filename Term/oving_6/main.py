@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+# Oppgave a
 temps = np.arange(86, 287, 40)
 a = 1.37
 b = 0.0387
@@ -24,11 +25,13 @@ for T in temps:
     pressures.append([p(v, T) for v in volumes])
 
 for i in range(len(pressures)):
-    plt.plot(volumes, pressures[i], label=f"Temperature: {temps[i]} [K]")
-plt.plot(volumes, [p_ideel(v) for v in volumes], label="Ideel gass i T = 286 K", color="black")
-plt.xlabel("Volume [V]")
-plt.ylabel("Pressure [p]")
+    plt.plot(volumes, pressures[i], label=f"Temperatur: {temps[i]} [K]")
+plt.plot(volumes, [p_ideel(v) for v in volumes], label="Ideel gass ved T = 286 K", color="black")
+plt.xlabel("Volum $V$ [L]")
+plt.xscale("log")
+plt.ylabel("Trykk $p$ [bar]")
 plt.legend()
 plt.show()
 
-    
+# Oppgave b
+ 
