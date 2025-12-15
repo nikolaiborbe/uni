@@ -1,0 +1,33 @@
+from scipy.random import gamma
+import numpy as np
+
+def simP(a: float, lambda: float, n: int, m: int, max_z: float) -> float:
+    """
+    Estimate the p-value cars on road.
+
+    Args:
+        a: Nr. event (alpha) input in gamma function.
+        lambda: Intensity (beta) input in gamma function.
+        n: Number of different experiment days.
+        m: Number of simulations to run.
+        max_z: H_1 to test against.
+
+    Returns:
+        float: estimated p-value.
+    """
+
+    Z_count = 0
+    for i in range(m):
+        dist_x = gamma.rvs(a, scale=1/lambda, size = n)
+        avg_x = np.mean(dist_x)
+        est_Z = (avg_x - 2/lambda) / np.sqrt(2/(n*lambda**2))
+
+        if est_Z <= max_z: Z_count += 1
+
+    return Z_count/m
+            
+print(simP(2, 0.23, 20, 10_000, 0.0094))
+
+        
+
+
