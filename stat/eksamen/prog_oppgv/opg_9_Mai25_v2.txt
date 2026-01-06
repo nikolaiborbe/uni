@@ -1,0 +1,21 @@
+import numpy as np
+from math import sqrt
+from scipy.stats import gamma
+
+def simP(Z_obs, m = 10_000, n = 20, lam = 0.23):
+    a = 2
+    b = 1/lam
+
+    count = 0
+
+    for _ in range(m):
+        x = gamma.rvs(shape = a, scale = b, size = n)
+        x_bar = sum(x) / n
+        z_sim = (x_bar - 2/lam) / sqrt(2 / (n*lam**2))
+
+        if z_sim < Z_obs: count += 1
+
+    return count / m
+
+
+
