@@ -248,6 +248,7 @@ void printBalance(vector<int> balanceVec) {
 int main() {
     // Oppgave 1a
     int x;
+    pythagoras();
 
     while(true)
     {

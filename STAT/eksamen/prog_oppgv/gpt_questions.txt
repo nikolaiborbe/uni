@@ -1,0 +1,54 @@
+import numpy as np
+
+# oppgave 1
+def simExp(lam, n):
+    u = np.random.uniform(0,1, size=n)
+    x = -lam / np.log(1-u)
+    return x
+
+# oppgave 2
+def simX(n):
+    u = np.random.uniform(0,1,size=n)
+    x = []
+    for u_i in u:
+        if u <= 0.2: x.append(
+
+    
+
+    return x 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# oppgave 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
