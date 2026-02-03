@@ -7,17 +7,24 @@
 using namespace TDT4102;
 
 // BEGIN: 5a
-constexpr int winW = 0;      // velg vindu bredde
-constexpr int winH = 0;      // velg vindu hoyde
+constexpr int winW = 500;      // vindu bredde
+constexpr int winH = 500;      // vindu hoyde
 
-constexpr int padX = 0;      // velg x skalering
-constexpr int padY = 0;      // velg y skalering
-constexpr int radCircle = 0; // velg sirkel radius
+// 4 rectangles + 1 circle area = 5 elements in x direction
+// padX = winW / (2 * 5 + 1) = 500 / 11 ≈ 45
+constexpr int padX = winW / (2 * 5 + 1);      // x skalering
+
+// 6 rounds + 2 (text box + code) = 8 elements in y direction
+// padY = winH / (2 * 8 + 1) = 500 / 17 ≈ 29
+constexpr int padY = winH / (2 * 8 + 1);      // y skalering
+
+// 4 circles, so radCircle = padX / 8
+constexpr int radCircle = padX / 8; // sirkel radius
 
 // END: 5a
 
 // BEGIN 5
-// deklarer playMasterMindVisual her
+void playMastermindVisual();
 // END: 5
 
 
