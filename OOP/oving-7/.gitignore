@@ -1,0 +1,6 @@
+.vscode
+build
+csv
+subprojects
+*.pdf
+.cache
