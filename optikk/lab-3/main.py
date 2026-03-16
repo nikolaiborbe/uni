@@ -1,0 +1,57 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+fig, axes = plt.subplots(2, 2)  # 2 rows, 2 columns
+
+
+def sinc(x):
+    return np.where(x == 0, 1, np.sin(x) / x)
+
+
+def fraunhofer(x, lam, D, y):
+    b = np.pi * D * x / (lam * y)
+    return sinc(b) ** 2
+
+
+def opg1():
+    lam = 532e-9  # m
+    D = 2e-6  # m
+    y = 1  # m
+
+    x = np.linspace(-1, 1, 1000)  # m
+    I = fraunhofer(x, lam, D, y)
+    axes[0, 0].plot(x, I)
+    axes[0, 0].set_xlabel("Position (m)")
+
+
+def opg2a():
+    lam = 532e-9  # m
+    y = 1  # m
+    D = 2e-6  # m
+
+    for D in np.linspace(D / 2, 2 * D, 5):  # m
+        x = np.linspace(-1, 1, 1000)  # m
+        I = fraunhofer(x, lam, D, y)
+        axes[0, 1].plot(x, I, label=f"$D={D*1e6:.0f} \\mu m$")
+    axes[0, 1].legend()
+    axes[0, 1].set_xlabel("Slit width D (m)")
+
+
+def opg2b():
+    D = 2e-6  # m
+    y = 1  # m
+    lam = 532e-9  # m
+
+    for lam in np.linspace(lam / 2, 2 * lam, 5):  # m
+        x = np.linspace(-1, 1, 1000)  # m
+        I = fraunhofer(x, lam, D, y)
+        axes[1, 0].plot(x, I, label=f"$\\lambda={lam*1e9:.0f} nm$")
+    axes[1, 0].legend()
+    axes[1, 0].set_xlabel("Wavelength $\\lambda$ (m)")
+
+
+if __name__ == "__main__":
+    opg1()
+    opg2a()
+    opg2b()
+    plt.show()
