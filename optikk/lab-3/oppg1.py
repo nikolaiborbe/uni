@@ -33,7 +33,7 @@ def opg1a():
         I = fraunhofer(x, lam, D, y)
         axes[0, 1].plot(x, I, label=f"$D={D*1e6:.0f} \\mu m$")
     axes[0, 1].legend()
-    axes[0, 1].set_xlabel("Slit width D (m)")
+    axes[0, 1].set_xlabel("Position (m)")
     axes[0, 1].set_ylabel("Normalized Intensity")
 
 
@@ -47,7 +47,7 @@ def opg1b():
         I = fraunhofer(x, lam, D, y)
         axes[1, 0].plot(x, I, label=f"$\\lambda={lam*1e9:.0f} nm$")
     axes[1, 0].legend()
-    axes[1, 0].set_xlabel("Wavelength $\\lambda$ (m)")
+    axes[1, 0].set_xlabel("Position (m)")
     axes[1, 0].set_ylabel("Normalized Intensity")
 
 

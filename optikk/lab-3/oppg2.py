@@ -3,12 +3,11 @@ import matplotlib.pyplot as plt
 from oppg1 import sinc
 
 
-def n_slit(D, x, lam, y, l, N):
+def double_slit(D, x, lam, y, l):
     b = (np.pi * D * x) / (lam * y)
-    d = (np.pi * l * x) / (lam * y)
     single_slit = sinc(b) ** 2
-    multi_slit = np.where(d == 0, 1, (np.sin(N * d) / (N * np.sin(d))) ** 2)
-    return single_slit * multi_slit
+    interference = np.cos((np.pi * l * x) / (lam * y)) ** 2
+    return single_slit * interference
 
 
 def opg2():
@@ -17,10 +16,9 @@ def opg2():
     lam = 532e-9  # m
     y = 1  # m
     l = 4e-6  # m
-    N = 3  # number of slits
 
     x = np.linspace(-1, 1, 1000)
-    I = n_slit(D, x, lam, y, l, N)
+    I = double_slit(D, x, lam, y, l)
 
     axes[0].plot(x, I)
     axes[0].set_xlabel("Position (m)")
@@ -31,11 +29,10 @@ def opg2a():
     lam = 532e-9  # m
     y = 1  # m
     l = 4e-6  # m
-    N = 3  # number of slits
 
     for i in np.linspace(l/2, 1.5*l, 3):
         x = np.linspace(-1, 1, 1000)
-        I = n_slit(D, x, lam, y, i, N)
+        I = double_slit(D, x, lam, y, i)
         axes[1].plot(x, I, label=f"l={i*1e6:.0f} um")
 
     axes[1].set_xlabel("Position (m)")

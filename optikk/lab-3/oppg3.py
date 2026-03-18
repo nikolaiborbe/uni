@@ -7,14 +7,12 @@ def n_slit(D, x, lam, y, l, N):
     b = (np.pi * D * x) / (lam * y)
     single_slit = sinc(b) ** 2
 
-    d = np.sin((N * np.pi * l * x) / (lam * y))
-    e = N * np.sin((np.pi * l * x) / (lam * y))
-    multi_slit = (d/e) ** 2
+    d = (np.pi * l * x) / (lam * y)
+    multi_slit = np.where(d == 0, 1, (np.sin(N * d) / (N * np.sin(d))) ** 2)
     return single_slit * multi_slit
 
 
 def opg3():
-    """I'm assuming the question meant to say y instead of x as distance between slit and screen."""
     D = 2e-6  # m
     lam = 532e-9  # m
     y = 1  # m
