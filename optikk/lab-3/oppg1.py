@@ -1,8 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-fig, axes = plt.subplots(2, 2)  # 2 rows, 2 columns
-
 
 def sinc(x):
     return np.where(x == 0, 1, np.sin(x) / x)
@@ -22,9 +20,10 @@ def opg1():
     I = fraunhofer(x, lam, D, y)
     axes[0, 0].plot(x, I)
     axes[0, 0].set_xlabel("Position (m)")
+    axes[0, 0].set_ylabel("Normalized Intensity")
 
 
-def opg2a():
+def opg1a():
     lam = 532e-9  # m
     y = 1  # m
     D = 2e-6  # m
@@ -35,9 +34,10 @@ def opg2a():
         axes[0, 1].plot(x, I, label=f"$D={D*1e6:.0f} \\mu m$")
     axes[0, 1].legend()
     axes[0, 1].set_xlabel("Slit width D (m)")
+    axes[0, 1].set_ylabel("Normalized Intensity")
 
 
-def opg2b():
+def opg1b():
     D = 2e-6  # m
     y = 1  # m
     lam = 532e-9  # m
@@ -48,10 +48,13 @@ def opg2b():
         axes[1, 0].plot(x, I, label=f"$\\lambda={lam*1e9:.0f} nm$")
     axes[1, 0].legend()
     axes[1, 0].set_xlabel("Wavelength $\\lambda$ (m)")
+    axes[1, 0].set_ylabel("Normalized Intensity")
 
 
 if __name__ == "__main__":
+    fig, axes = plt.subplots(2, 2)  # 2 rows, 2 columns
+
     opg1()
-    opg2a()
-    opg2b()
+    opg1a()
+    opg1b()
     plt.show()
