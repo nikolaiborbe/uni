@@ -50,6 +50,19 @@ def opg1b():
     axes[1, 0].set_xlabel("Position (m)")
     axes[1, 0].set_ylabel("Normalized Intensity")
 
+def opg1c():
+    D = 25e-6  # m
+    y = 0.32  # m
+    lam = 532e-9  # m
+
+    x = np.linspace(-0.1, 0.1, 1000)  # m
+    I = fraunhofer(x, lam, D, y)
+    axes[1, 1].plot(x, I)
+    axes[1, 1].set_xlabel("Position (m)")
+    axes[1, 1].set_ylabel("Normalized Intensity")
+    axes[1, 1].set_title("D=25um, y=0.32m, $\\lambda=532$nm")
+    axes[1, 1].legend()
+
 
 if __name__ == "__main__":
     fig, axes = plt.subplots(2, 2)  # 2 rows, 2 columns
@@ -57,4 +70,5 @@ if __name__ == "__main__":
     opg1()
     opg1a()
     opg1b()
+    opg1c()
     plt.show()
