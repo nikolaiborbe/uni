@@ -1,35 +1,38 @@
-# NN to predict numbers x∈(0,1) from inputs 1-9.
+# NN to predict x∈(0,1) from inputs 1-9.
 
 from __future__ import annotations
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 sigmoid = lambda x: 1 / (1 + np.exp(-x))
 relu = lambda x: np.maximum(0, np.minimum(x,1))
+squared = lambda x: np.pow(x, 2) 
 
-
-class Synapse:
-    def __init__(self, input: Neuron | float, output: Neuron | float):
-        self.input = input
-        self.output = output
-        self.weight = 0.0
-
-    def update_weight(self, new_weight: float):
-        self.weight = new_weight
+BIAS = 0
+LAYERS = 2
+WIDTH = 3
+AF = ACTIVATION_FUNCTION = squared
 
 
 class Neuron:
-    def __init__(self, synapses: list[Synapse]):
-        self.synapsis = synapses
-    
-    def update(self):
-        for synapse in self.synapsis:
-            synapse.update_weight(...)
+    def __init__(self, weights: np.ndarray):
+        self.W = weights
+        self.output = np.zeros()
 
-    def transfer(self):
-        inputs = self.synapsis
+    def update(self, x: np.ndarray):
+        z = self.W @ x
+        a = AF(z)
+        self.output = a
+        return a
 
+weights = np.array([[1, -3], [-2, 1]])
+x = np.array([[3], [2]])
+n1 = Neuron(weights)
+n1.update(x)
+
+n2 = Neuron(n1.output)
+
+print(n2.output)
 
 
 class NN:
