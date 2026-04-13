@@ -42,7 +42,6 @@ l3.update(l2.output)
 
 print(l3.output)
 
-
 class NN:
     def __init__(self, nr_inputs: int, nr_outputs: int, layers: int, depth: int):
         pass
