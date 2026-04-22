@@ -20,6 +20,9 @@
   page-paper: "us-letter",
 )
 
+#show link: set text(fill: blue)
+#show link: underline
+ 
 // Frontmatter
 #maketitle(
   title: "Bruk av skytemetoden til løsning av randverdiproblemer.",
@@ -75,51 +78,16 @@ Vi forsikrer oss om at initialbetingelsene $bold(y_0) = (1, s, 0, 1)^T$. $y_1(0)
 
 Vi bruker `scipy.integral.solve_bvp`, og plotter løsningen,
 
-#image("assets/skytemetoden.png")
+#image("assets/diff_epsilon.png")
 
-Vi får en svært god løsning for x etter bare 2 steg, altså er BVP-et vårt relativt enkelet å løse. 
+Vi får en svært god løsning for $x$ etter bare 2 steg, altså er BVP-et vårt relativt enkelet å løse med $epsilon = 1$. Om vi videre prøver å bruke mindre epsilon vil ikke Skytemetoden lenger fungere, det blir for mange mulige løsninger og NM blir svært stor svært fort.
+Vi kan få en bedre intuisjon av hvorfor vi ikke greier å numeriske løse @eq:likningsystemet[] om vi visualiserer problemet i faseplott,
 
-== In this paper
-as shown in @eq:løsn_3a[]
-#lorem(70)
+#image("assets/faseplott.png")
 
-#figure(rect(width: 4cm, height: 3cm), caption: shortcap(
-  [A short caption of the image],
-  [#lorem(30)],
-))
+kan vi klart se at det fort blir svært vanskelig å finne løsninger for $epsilon$ når $epsilon arrow 0$.
 
-#lorem(20)
-
-=== Contributions
-#lorem(40)
-
-#lorem(40)
-
-= Related Work
-#balance(columns(2, [#lorem(200)]))
-
-$
-  y = k x + d
-$
-#lorem(50)
-
-// Example of a custom table
-#figure(
-  ctable(cols: "l|cr", [A], [B], [C], ..range(1, 16).map(str)),
-  caption: shortcap(
-    "Short caption",
-    "This is a custom table",
-  ),
-)
-
-#colbreak()
 #show: appendix.with(title: "Appendix")
 
-= Appendix 1
-#lorem(35)
+Kodefiler kan bli funnet #link("https://github.com/nikolaiborbe/uni/tree/main/VITBER/ovinger/O3")[her].
 
-== Some more details
-#lorem(20)
-
-#fig-outline()
-#tab-outline()

@@ -50,17 +50,18 @@ for i in range(1, len(n)): # 10 steps of newtons method
     x[i] = x[i-1] - y[i-1][0]/y[i-1][1]
     y[i] = F(x[i])
 
-ax[0].plot(n, y[:,0], color="black", marker="+")
+ax[0].plot(n, y[:,0], color="black", marker="+", label="$\epsilon = 1$")
 ax[0].set_xlabel("Steg")
 ax[0].set_ylabel("Feil i $y$", rotation=0, labelpad=20)
 ax[0].set_title("Newton iterasjoner (skytemetoden)")
+ax[0].legend()
 
 epsilon_values = [1, 0.1, 0.05, 0.01]
 for epsi in epsilon_values:
-    n = np.arange(0,5)
+    n = np.arange(0,50)
     x = np.zeros(np.size(n))
     y = np.zeros(2*np.size(n)).reshape(-1,2)
-    x[0] = x0 = 4
+    x[0] = 0
     y[0] = F(x[0], epsilon=epsi)
 
     for i in range(1, len(n)): # 10 steps of newtons method
@@ -72,8 +73,6 @@ for epsi in epsilon_values:
 ax[1].set_title("Newton iterasjoner (skytemetoden) med forskjellige $\epsilon$")
 ax[1].set_xlabel("Steg")
 ax[1].set_ylabel("Feil i $y$", rotation=0, labelpad=20)
-plt.legend()
+ax[1].legend()
 plt.show()
-
-
 
