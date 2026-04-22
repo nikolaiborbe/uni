@@ -37,33 +37,47 @@
 
 Skytemetoden kan bli brukt til å gjette løsninger, se hvor godt de stemmer, for å så bruke denne informasjonen til et nytt, og bedre, gjett.
 
-== Løsningsforslag
+== Bakgrunn
 
-Vi har to ligninger,
+Vi skal forsøke å løse randverdiproblemet,
 
 $
-  v'' = 1/epsilon (v(y'-1) + v'y), quad v(0) = 1, quad v(1) = 1
+  epsilon y'' = y y' - y, quad y(0) = 1, quad y(1) = -1
+$ <eq:randverdi_prob>
+
+ved hjelp av en IVP-løser og Newtoniterasjon (skytemetoden). Vi har to ligninger,
+
+$
+  v'' = 1/epsilon (v(y'-1) + v'y), quad v(0) = 0, quad v'(0) = 1
 $ <eq:løsn_2a>
 
 $
   y'' = 1/epsilon (y y'-y), quad y(a) = alpha, quad y'(a) = s
 $ <eq:løsn_3a>
 
-Vi skriver om disse til et førsteordens likningssystem som vi senere kan bruke for å finne en løsning,
+her er @eq:løsn_3a[] initialverdiproblemet til @eq:randverdi_prob[], og @eq:løsn_2a[] variasjonslikningen. Vi skriver om disse til et førsteordens likningssystem som vi senere kan bruke for å finne en løsning,
 
 $
   bold(y) = vec(y_1, y_2, y_3, y_4) = vec(y, y', v, v')
 $ <eq:likningsystemet>
 
-og om vi skriver om @eq:løsn_3a[] og @eq:løsn_2a[] med bruk av $y_1 : y_4$ (denne notasjonen betyr "$y_1$ opp til og med $y_4$") får vi,
+og om vi skriver om @eq:løsn_3a[] og @eq:løsn_2a[] med bruk av $y_1,..., y_4$ får vi,
 
 #set math.equation(numbering: none)
 $
   bold(y') = vec(y', y'', v', v'') = vec(y_2, epsilon^(-1) (y_1 y_2 - y_1), y_4, epsilon^(-1) (y_3(y_2 - 1) + y_4 y_1))
 $
 
-Vi forsikrer oss om at disse løser $bold(y_0) = (1, s, 0, 1)^T$. $y_1(0)$ og $y_2(0)$ kan vi se at ble oppgitt fra initialbetingelsene $y(0) = 1$ og $y'(a) = s$. Siden $v(x;s) := partial/(partial S) y(x;s)$ ser vi også at $partial/(partial S) y(0; s) = 0$, og $v' = partial/(partial S) partial/(partial x) y(0; s) = partial/(partial S) s = 1$. Så initialbetingelsene $bold(y_0)$ stemmer.
-$bold("Note:")$ dette er trolig litt feil—i alle fall upresist.
+Vi forsikrer oss om at initialbetingelsene $bold(y_0) = (1, s, 0, 1)^T$. $y_1(0)$ og $y_2(0)$ oppfylles. Da kan vi se at ble oppgitt fra initialbetingelsene $y(0) = 1$ og $y'(a) = s$. Siden $v(x;s) := partial/(partial S) y(x;s)$ ser vi også at $partial/(partial S) y(0; s) = 0$, og $v' = partial/(partial S) partial/(partial x) y(0; s) = partial/(partial S) s = 1$. Så initialbetingelsene $bold(y_0)$ stemmer.
+
+
+== Numerisk løsning ved skytemetoden
+
+Vi bruker `scipy.integral.solve_bvp`, og plotter løsningen,
+
+#image("assets/skytemetoden.png")
+
+Vi får en svært god løsning for x etter bare 2 steg, altså er BVP-et vårt relativt enkelet å løse. 
 
 == In this paper
 as shown in @eq:løsn_3a[]
