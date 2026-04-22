@@ -76,12 +76,12 @@ Vi forsikrer oss om at initialbetingelsene $bold(y_0) = (1, s, 0, 1)^T$. $y_1(0)
 
 == Numerisk løsning ved skytemetoden
 
-Vi bruker `scipy.integral.solve_bvp`, og plotter løsningen,
+Vi bruker `scipy.integrate.solve_ivp`, og plotter løsningen,
 
 #image("assets/diff_epsilon.png")
 
-Vi får en svært god løsning for $x$ etter bare 2 steg, altså er BVP-et vårt relativt enkelet å løse med $epsilon = 1$. Om vi videre prøver å bruke mindre epsilon vil ikke Skytemetoden lenger fungere, det blir for mange mulige løsninger og NM blir svært stor svært fort.
-Vi kan få en bedre intuisjon av hvorfor vi ikke greier å numeriske løse @eq:likningsystemet[] om vi visualiserer problemet i faseplott,
+Vi får en svært god løsning for $x$ etter bare 2 steg, altså er BVP-et vårt relativt enkelt å løse med $epsilon = 1$. Om vi videre prøver å bruke mindre epsilon vil ikke Skytemetoden lenger fungere, det blir for mange mulige løsninger og NM blir svært stor svært fort.
+Vi kan få en bedre intuisjon av hvorfor vi ikke greier å numerisk løse @eq:likningsystemet[] om vi visualiserer problemet i faseplott,
 
 #image("assets/faseplott.png")
 
