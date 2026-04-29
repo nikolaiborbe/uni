@@ -1,4 +1,6 @@
 #include "Table.h"
+#include "SDL_keycode.h"
+#include <filesystem>
 
 
 void Table::drawTitleRow(AnimationWindow &window, int height, int width, Point topLeftCorner)
@@ -80,6 +82,16 @@ void Table::draw(AnimationWindow &window, int height, int width, Point topLeftCo
 void Table::storeTable(filesystem::path filepath)
 {
 // BEGIN: T11
-    ;
+    std::ofstream file{filepath};
+    if (!file)
+        throw runtime_error("File could not be found or opened");
+
+    for (const auto& row : this->data) {
+        for (size_t i{}; i < row.size(); ++i) {
+            file << row[i].columnTitle << ":" << row[i].value << " ";
+        }
+        file << "\n";
+    }
+
 // END: T11
 }

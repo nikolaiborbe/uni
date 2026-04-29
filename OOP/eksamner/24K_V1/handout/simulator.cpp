@@ -37,7 +37,10 @@ std::chrono::duration<int64_t, std::nano> Stopwatch::getTime()
 string Stopwatch::millisecondsToString(int timeInMilliseconds)
 {
 // BEGIN: T7
-    return "0.0.0";
+    int min = std::floor(timeInMilliseconds/1000/60);
+    int sec = std::floor((timeInMilliseconds - min*60*1000)/1000);
+    int ms = timeInMilliseconds - min*60*1000 - sec*1000;
+    return to_string(min) + "." + to_string(sec) + "." + to_string(ms);
 // END: T7
 }
 
@@ -59,8 +62,28 @@ string Stopwatch::timeToString(std::chrono::duration<int64_t, std::nano> clock)
 int Stopwatch::stringToMilliseconds(string time)
 {
 // BEGIN: T8
-    std::istringstream ss{time};
-    return 0;
+    string word{};
+    std::array<int, 3> times{};
+    uint8_t current_index = 0;
+    for (size_t i{}; i < time.size(); ++i) {
+        if (time[i] != '.')
+            word.push_back(time[i]);
+        else {
+            times[current_index] = stoi(word);
+            ++current_index;
+            word = "";
+        }
+    }
+
+    times[current_index] = stoi(word); // add the last time.
+
+    int minutes = times[0];
+    int seconds = times[1];
+    int ms      = times[2];
+
+    int tot_ms = minutes*60*1000 + seconds*1000 + ms;
+
+    return tot_ms;
 // END: T8
 }
 
@@ -70,7 +93,7 @@ int Stopwatch::stringToMilliseconds(string time)
 void Target::hit()
 {
 // BEGIN: T2
-    ;
+    ++hits;
 // END: T2
 }
 
@@ -238,7 +261,21 @@ string Simulator::finaliseResult(vector<TableData<string>> &row)
 {
 // BEGIN: T9
     int PENALTY_FACTOR = static_cast<int>(PENALTY / SPEED_SCALE);
-    return "";
+    int hits_index = table->getColumnIndexInRow("Hits",row); 
+    if (hits_index == -1)
+        return "Hits missing";
+
+    int time_index = table->getColumnIndexInRow("Time", row);
+    if (time_index == -1)
+        return "Time missing";
+
+    int ms_time = watch->stringToMilliseconds(row.at(time_index).value);
+    int hits = stoi(row.at(hits_index).value);
+    int missing = MAX_HITS - hits;
+
+    int new_time = missing*PENALTY_FACTOR + ms_time;
+
+    return watch->millisecondsToString(new_time);
 // END: T9
 }
 
@@ -288,6 +325,11 @@ void Simulator::placeImages(TDT4102::Point centerPoint,
         centerPoint.x + outerRadius + 10,
         centerPoint.y - 12
     };
+    TDT4102::Image flag_img{"images/race.png"};
+    TDT4102::Image crosshair_img{"images/crosshair.png"};
+    window.draw_image(flagPosLeft, flag_img, size, size);
+    window.draw_image(flagPosRight, flag_img, size, size);
+    window.draw_image(crosshairPosition, crosshair_img, size, size);
 // END: T3
 }
 
@@ -298,11 +340,14 @@ TDT4102::Point Simulator::calculateSkierPosition(TDT4102::Point centerPoint,
                                                     Skier &skier, int radius)
 {
 // BEGIN: T4
-    return {
-        centerPoint.x + radius,
-        centerPoint.y
-    };
-// END: T4
+    double theta = 2*M_PI*skier.getPosition()/map.distance;
+
+    int x_new = centerPoint.x + radius*std::cos(theta);
+    int y_new = centerPoint.y + radius*std::sin(theta);
+
+    TDT4102::Point new_point {x_new, y_new};
+    return new_point;
+    // END: T4
 }
 
 

@@ -18,7 +18,11 @@ struct TableData
 // Overload the << operator for the templated struct TableData.
 // The form should be "title:value".
 // BEGIN: T10
-    ;
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const TableData<T>& other) {
+    os << other.columnTitle << ":" << other.value;
+    return os;
+}
 // END: T10
 
 
@@ -34,7 +38,23 @@ public:
 // new columnTitles before adding the row to
 // data.
 // BEGIN: T5
-#define ADD_ROW_NOT_IMPLEMENTED
+// #define ADD_ROW_NOT_IMPLEMENTED
+    template <typename T>
+    void addRow(std::vector<TableData<T>> td) {
+        for (const auto& td_ : td) {
+            bool seen = false;
+            for (const auto& name : columnTitles) {
+                if (td_.columnTitle == name) {
+                    seen = true;
+                    break;
+                }
+            }
+            if (!seen)
+                columnTitles.push_back(td_.columnTitle);
+        }
+
+        data.push_back(td);
+    }
 // END: T5
 
 
@@ -43,7 +63,20 @@ public:
 // which returns the index of a given columnTitle
 // for a given row.
 // BEGIN: T6
-#define GET_INDEX_NOT_IMPLEMENTED
+    template <typename T>
+    int getColumnIndexInRow(std::string kolonnetittel, std::vector<TableData<T>> row_data) {
+        int i {};
+        for (const auto& row : row_data) {
+            std::string name = row.columnTitle;
+            if (name == kolonnetittel)
+                return i;
+
+            ++i;
+        }
+        return -1;
+    }
+
+// #define GET_INDEX_NOT_IMPLEMENTED
 // END: T6
 
 

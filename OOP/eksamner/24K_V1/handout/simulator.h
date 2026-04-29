@@ -185,6 +185,7 @@ private:
 // Give the ToggleButton class access to
 // private members of the Simulator class.
 // BEGIN: T1
-#define START_BUTTON_NO_ACCESS_TO_RUNNING_AND_WATCH
+// #define START_BUTTON_NO_ACCESS_TO_RUNNING_AND_WATCH
+    friend class ToggleButton;
 // END: T1
 };
