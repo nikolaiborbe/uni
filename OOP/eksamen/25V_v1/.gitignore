@@ -1,0 +1,6 @@
+worlds/
+images/
+*.pdf
+subprojects
+.vscode
+.cache

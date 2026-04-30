@@ -1,0 +1,53 @@
+DEL 1
+^1) 2/3 
+x2) 1/2/3/4
+x3) 1/4
+^4) 3
+x5) 1 (antall=5)
+x6) 4
+^7) 1/3
+x8) 
+	Medlems: begge
+	Local variabler: stack
+	Funksjonsargus: begge,
+	Et objekt allo.: Heap/Free store
+^9) 1
+^10) 1
+^11) 1/2
+x12) 4
+
+DEL 2
+(4/10) 13) Et bibliotek er en kodefile(er) som man inkluderer i sin egen kodefil. Linking er nyttig når man bruker et bibliotek fordi det gjør at om du f.eks. bruker en funksjon flere ganger, så vil ikke biblioteket bli inkludert flere ganger.
+-> Det blir feil å si at linking er for at kode ikke skal bli inkludert flere ganger. Det er bedre å si at "linkeren kombinerer koden til biblioteket og egen kode inn i en kjørbar fil (excecutable)".
+
+(9/10) 14) En funksjonsdeklarasjon er en måte å fortelle kompilatoren at en funksjon finnes slik at man kan bruke den andre steder. En definisjon inneholder da selve implementasjonen til denne funksjonen—altså hvordan den funker.
+
+(7/10) 15) Implisitt typekonvertering er når kompilatoren selv bytter om typen til et variabel uten å si ifra. Eksplisitt er når en selv gjør det, som f.eks. ved å kalle static_cast<> funksjonen.
+-> Burde også nevnte at ved explisitt konvertering kan man tvinge tap av bits, men implisitt vil altid gå fra færre til flere bits. 
+
+(0/10) 16) Dette vet jeg ikke.
+-> Grunn kopiering kopierer medlemsvariablene til en klasse eller en struct, og dyp kopiering er noe en bruker implementerer selv og lar en spesifisere hvordan kopieringen skal hende. Ved shallow copy vil du f.eks. bare lagre en kopi av pekere slik at den copierte klassen peker til samme minneobjekter; men hvor en dyp kopiering kan f.eks. implementere at man lager en ny minnelokasjon med de samme elementene slik at objektet har sitt eget, kopierte, minne.
+
+(8/10) 17) std::set har bare max ett element av hver verdi. std::unique_copy() copierer bare over elementer some er unike. Om man kopierer en std::vector til et std::set, så vil den ha samme funksjonalitet som om man brukte unique_copy().
+-> Litt upresists, initialiseringen til std::set hopper over like elementer—det er liknende, men IKKE samme fuksjonalitet.
+
+(8/10) 18) push_back() sjekker først capacity-en til vektor instansen, om det ikke er plass til ett nytt element, lager den en ny plass i minne og plaserer alle elementene her pluss den nye ved end(), om det er plass plaserer den elementet til end().
+-> Nevn at når størelsen øker så dobbles den som oftests. 
+
+(8/10) 19) Kodeblokk en gir en feil fordi kompilatoren ser at vi prøver å slette pekeren p 2 ganger, i kodeblokk 2 overrider vi variabelen p til ett nytt sted i heap minnet, her vil det skje en memory leak fordi bare dette nye stedet i minnet blir frigjort, ikke det første som ble initialisert.
+
+20) Jeg vet ikke
+-> const funksjoner kan ikke endre på medlemsvariablene. 
+
+21) 
+	(2/10) a) unique_ptr er skrevet feil. 
+	-> unique_ptr kan IKKE kopieres, bare flyttes. Så når push_back prøver å plasere den i vektoren, greier den ikke å kopiere over unique_ptr-en. 
+	(0/10) b) Skrevet det riktig.
+	-> Det man kunne gjort ville vært å bruke emplace_back, denne vil konstruere objectet in-place i vektoren: vec.emplace_back(std::make_unique<A>(5)). Om man ikke vil dette, kan man også bruke vec.push_back(std::move(a)).
+
+22) 
+	(9/10) a) structen har ikke overloadet sammenlikningsoperatorene: f.eks. "==", og ">".
+	(8/10) b) Du må implementere overriding av operatorene. f.eks. bool Point::operator==(const Point& b) const ...
+	-> Det heter overlaste, altså "overload", IKKE overriding. 
+
+

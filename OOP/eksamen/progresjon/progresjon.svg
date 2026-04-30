@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="470" viewBox="0 0 840 470">
+<rect width="100%" height="100%" fill="white"/>
+<text x="420" y="28" text-anchor="middle" font-size="22" font-family="Arial, sans-serif" fill="#111827">OOP-progresjon: del 1 og del 2</text>
+<g font-family="Arial, sans-serif">
+<line x1="70" y1="385.0" x2="760" y2="385.0" stroke="#e5e7eb"/><text x="58" y="389.0" text-anchor="end" font-size="12" fill="#4b5563">0</text><line x1="70" y1="330.0" x2="760" y2="330.0" stroke="#e5e7eb"/><text x="58" y="334.0" text-anchor="end" font-size="12" fill="#4b5563">10</text><line x1="70" y1="275.0" x2="760" y2="275.0" stroke="#e5e7eb"/><text x="58" y="279.0" text-anchor="end" font-size="12" fill="#4b5563">20</text><line x1="70" y1="220.0" x2="760" y2="220.0" stroke="#e5e7eb"/><text x="58" y="224.0" text-anchor="end" font-size="12" fill="#4b5563">30</text><line x1="70" y1="165.0" x2="760" y2="165.0" stroke="#e5e7eb"/><text x="58" y="169.0" text-anchor="end" font-size="12" fill="#4b5563">40</text><line x1="70" y1="110.0" x2="760" y2="110.0" stroke="#e5e7eb"/><text x="58" y="114.0" text-anchor="end" font-size="12" fill="#4b5563">50</text><line x1="70" y1="55.0" x2="760" y2="55.0" stroke="#e5e7eb"/><text x="58" y="59.0" text-anchor="end" font-size="12" fill="#4b5563">60</text>
+<line x1="70.0" y1="55" x2="70.0" y2="385" stroke="#f3f4f6"/><text x="70.0" y="413" text-anchor="middle" font-size="12" fill="#111827">1. 24K_V1</text><line x1="300.0" y1="55" x2="300.0" y2="385" stroke="#f3f4f6"/><text x="300.0" y="413" text-anchor="middle" font-size="12" fill="#111827">2. 24K_v2</text><line x1="530.0" y1="55" x2="530.0" y2="385" stroke="#f3f4f6"/><text x="530.0" y="413" text-anchor="middle" font-size="12" fill="#111827">3. Share 69f38018</text><line x1="760.0" y1="55" x2="760.0" y2="385" stroke="#f3f4f6"/><text x="760.0" y="413" text-anchor="middle" font-size="12" fill="#111827">4. Share 69f38038</text>
+<line x1="70" y1="55" x2="70" y2="385" stroke="#9ca3af"/>
+<line x1="70" y1="385" x2="760" y2="385" stroke="#9ca3af"/>
+<text x="20" y="230" text-anchor="middle" font-size="13" fill="#111827" transform="rotate(-90 20 230)">Poeng av 60</text>
+<polyline points="70.0,139.8 300.0,130.6 530.0,222.2 760.0,126.5" fill="none" stroke="#2563eb" stroke-width="3"/>
+<circle cx="70.0" cy="139.8" r="5" fill="#2563eb"/>
+<text x="70.0" y="127.8" text-anchor="middle" font-size="12" fill="#2563eb">44.6</text>
+<circle cx="300.0" cy="130.6" r="5" fill="#2563eb"/>
+<text x="300.0" y="118.6" text-anchor="middle" font-size="12" fill="#2563eb">46.2</text>
+<circle cx="530.0" cy="222.2" r="5" fill="#2563eb"/>
+<text x="530.0" y="210.2" text-anchor="middle" font-size="12" fill="#2563eb">29.6</text>
+<circle cx="760.0" cy="126.5" r="5" fill="#2563eb"/>
+<text x="760.0" y="114.5" text-anchor="middle" font-size="12" fill="#2563eb">47.0</text>
+<circle cx="720" cy="46" r="5" fill="#2563eb"/>
+<text x="735" y="50" font-size="13">Del 1</text>
+<polyline points="70.0,211.8 300.0,206.2 530.0,104.5 760.0,187.0" fill="none" stroke="#16a34a" stroke-width="3"/>
+<circle cx="70.0" cy="211.8" r="5" fill="#16a34a"/>
+<text x="70.0" y="231.8" text-anchor="middle" font-size="12" fill="#16a34a">31.5</text>
+<circle cx="300.0" cy="206.2" r="5" fill="#16a34a"/>
+<text x="300.0" y="226.2" text-anchor="middle" font-size="12" fill="#16a34a">32.5</text>
+<circle cx="530.0" cy="104.5" r="5" fill="#16a34a"/>
+<text x="530.0" y="124.5" text-anchor="middle" font-size="12" fill="#16a34a">51.0</text>
+<circle cx="760.0" cy="187.0" r="5" fill="#16a34a"/>
+<text x="760.0" y="207.0" text-anchor="middle" font-size="12" fill="#16a34a">36.0</text>
+<circle cx="720" cy="70" r="5" fill="#16a34a"/>
+<text x="735" y="74" font-size="13">Del 2</text>
+<polyline points="70.0,175.8 300.0,168.4 530.0,163.4 760.0,156.8" fill="none" stroke="#7c3aed" stroke-width="3" stroke-dasharray="8 6"/>
+<circle cx="720" cy="94" r="5" fill="#7c3aed"/>
+<text x="735" y="98" font-size="13">Snitt</text>
+</g>
+</svg>
