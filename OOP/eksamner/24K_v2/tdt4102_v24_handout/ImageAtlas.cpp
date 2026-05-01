@@ -1,5 +1,6 @@
 #include <iterator>
 #include <algorithm>
+#include <memory>
 
 #include "ImageAtlas.h"
 #include "Image.h"
@@ -16,7 +17,13 @@ std::shared_ptr<TDT4102::Image> ImageAtlas::get_image(const std::string &key)
 // Write your answer to assignment T5 here, between the //BEGIN: T5
 // and // END: T5 comments. You should remove any code that is
 // already there and replace it with your own.
-    return {};
+    try {
+        auto out = container.at(key);
+        return out;
+    } catch (...) {
+        return std::shared_ptr<TDT4102::Image>();
+    }
+
 // END: T5
 }
 
