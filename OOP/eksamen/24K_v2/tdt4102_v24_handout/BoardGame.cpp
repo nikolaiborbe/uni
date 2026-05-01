@@ -11,7 +11,18 @@ bool BoardGame::inside_interaction_zone(TDT4102::Point pt)
 // Write your answer to assignment T3 here, between the //BEGIN: T3
 // and // END: T3 comments. You should remove any code that is
 // already there and replace it with your own.
-    return true;
+
+    auto b0 = get_position();
+    auto width = get_width();
+    auto height = get_height();
+
+    auto pt_inside_x_axis = b0.x < pt.x && pt.x < b0.x + width;
+    auto pt_inside_y_axis = b0.y < pt.y && pt.y < b0.y + height;
+
+    if (pt_inside_x_axis && pt_inside_y_axis)
+        return true;
+
+    return false;
 // END: T3
 }
 
@@ -23,7 +34,12 @@ void BoardGame::highlight()
 // Write your answer to assignment T7 here, between the //BEGIN: T7
 // and // END: T7 comments. You should remove any code that is
 // already there and replace it with your own.
-    ;
+    int size = board.get_size();
+    for (int y{}; y < size; ++y) {
+        for (int x{}; x < size; ++x) {
+            highlighted[y*size + x] = Rules::can_move(board, selected, TDT4102::Point{x,y}, turn);
+        }
+    }
 // END: T7
 }
 
@@ -34,9 +50,11 @@ BoardGame::BoardGame(const Board &board_)
 // and // END: T10 comments. You should remove any code that is
 // already there and replace it with your own.
 {
+    board = board_;
+    winner = Player::NONE;
     turn = Player::ONE;
-    this->board = Board::create_blank(8);
-    this->resize(8);
+    enabled = true;
+    highlighted.resize(board_.get_size() * board_.get_size());
 // END: T10
 }
 
