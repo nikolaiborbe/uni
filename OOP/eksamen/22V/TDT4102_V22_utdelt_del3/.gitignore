@@ -1,6 +1,6 @@
-images
-grids
+*.mp4
+build
+programs
 subprojects
 .vscode
 meson.build
-.cache

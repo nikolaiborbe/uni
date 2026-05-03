@@ -18,12 +18,13 @@ public:
 // and // END: T5 comments. You should remove any code that is
 // already there and replace it with your own.
   CellButton(TDT4102::Point location, unsigned int width, unsigned int height,
-             std::string text) : TDT4102::Button(TDT4102::Point{0,0}, 1, 1, "")
+             std::string text) : TDT4102::Button(location, width, height, text)
   {
     this->setCallback(callback);
   }
 
   static void callback() {
+    currentCellType = type;
   }
 
 // END: T5
@@ -34,7 +35,9 @@ struct CellCooler : public NoOpCellTool {
 // Write your answer to assignment T8 here, between the //BEGIN: T8
 // and // END: T8 comments. You should remove any code that is
 // already there and replace it with your own.
-
+    void apply(Cell& c) override {
+        c.temperature -= 0.1;
+    }
 // END: T8
 };
 

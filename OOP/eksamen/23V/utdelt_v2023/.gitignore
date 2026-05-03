@@ -1,6 +1,3 @@
-images
-grids
 subprojects
 .vscode
-meson.build
 .cache
