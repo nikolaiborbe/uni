@@ -1,6 +1,8 @@
 #pragma once
 
+#include <cstddef>
 #include <filesystem>
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -23,3 +25,24 @@ std::vector<Measurement> generate_random_measurements(
     int min_value,
     int max_value
 );
+
+class MeasurementSeries {
+public:
+    MeasurementSeries(const std::string& name, const std::vector<double>& values);
+    ~MeasurementSeries();
+    MeasurementSeries(const MeasurementSeries& other);
+
+    const std::string& name() const;
+    std::size_t size() const;
+    double at(std::size_t index) const;
+    void set(std::size_t index, double value);
+
+private:
+    std::string name_;
+    double* values_;
+    std::size_t count_;
+
+    friend std::ostream& operator<<(std::ostream& os, const MeasurementSeries& series);
+};
+
+std::ostream& operator<<(std::ostream& os, const MeasurementSeries& series);

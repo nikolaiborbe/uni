@@ -7,6 +7,7 @@ Dette er et lite øvingssett laget i samme stil som tidligere TDT4102-eksamensop
 - parse enkle linjer med `std::stringstream`
 - generere tilfeldige heltall med `<random>`
 - bruke tilfeldige tall til å lage data som kan skrives til fil
+- lage en enkel klasse med constructor, destructor, copy constructor og `operator<<`
 
 Du skal skrive svarene i `src/Tasks.cpp` mellom `// BEGIN: Tn` og `// END: Tn`.
 
@@ -95,6 +96,121 @@ Krav:
 - bruk `random_int`
 - kast `std::invalid_argument` hvis `count < 0`
 - alle målinger skal ha navnet som ble sendt inn
+
+### T6: Måleserie som klasse
+
+Implementer klassen `MeasurementSeries`. Klassen skal representere en serie med måleverdier, for eksempel temperaturmålinger.
+
+Klassen er deklarert i `src/Tasks.h`:
+
+```cpp
+class MeasurementSeries {
+public:
+    MeasurementSeries(const std::string& name, const std::vector<double>& values);
+    ~MeasurementSeries();
+    MeasurementSeries(const MeasurementSeries& other);
+
+    const std::string& name() const;
+    std::size_t size() const;
+    double at(std::size_t index) const;
+    void set(std::size_t index, double value);
+
+private:
+    std::string name_;
+    double* values_;
+    std::size_t count_;
+
+    friend std::ostream& operator<<(std::ostream& os, const MeasurementSeries& series);
+};
+```
+
+Du skal implementere constructor, destructor, copy constructor og `operator<<` i `src/Tasks.cpp`.
+
+#### T6A: Constructor
+
+Implementer constructoren:
+
+```cpp
+MeasurementSeries::MeasurementSeries(const std::string& name, const std::vector<double>& values)
+```
+
+Constructoren skal:
+
+- lagre `name` i `name_`
+- lagre antall verdier i `count_`
+- allokere en dynamisk array med `new double[count_]`
+- kopiere alle verdiene fra `values` inn i den dynamiske arrayen
+
+Hvis `values` er tom, skal `count_` bli `0` og `values_` være `nullptr`.
+
+#### T6B: Destructor
+
+Implementer destructoren:
+
+```cpp
+MeasurementSeries::~MeasurementSeries()
+```
+
+Destructoren skal frigjøre arrayen som ble allokert i constructoren.
+
+Krav:
+
+- bruk `delete[]`
+- det skal være trygt å destruere et objekt der `values_ == nullptr`
+
+#### T6C: Copy Constructor
+
+Implementer copy constructoren:
+
+```cpp
+MeasurementSeries::MeasurementSeries(const MeasurementSeries& other)
+```
+
+Copy constructoren skal lage en dyp kopi.
+
+Krav:
+
+- kopier `name_`
+- kopier `count_`
+- alloker ny egen array for kopien
+- kopier alle verdiene fra `other`
+- kopien og originalen skal ikke dele samme array
+
+Dette skal fungere:
+
+```cpp
+MeasurementSeries original{"temperature", {18.5, 19.25}};
+MeasurementSeries copy{original};
+original.set(0, -100.0);
+
+// copy.at(0) skal fortsatt være 18.5
+```
+
+#### T6D: Utskriftsoperator
+
+Implementer `operator<<`:
+
+```cpp
+std::ostream& operator<<(std::ostream& os, const MeasurementSeries& series)
+```
+
+Operatoren skal skrive måleserien på denne formen:
+
+```text
+temperature: 18.5, 19.25, 20
+```
+
+Hvis serien ikke har noen verdier, skal bare navnet og kolon skrives:
+
+```text
+humidity:
+```
+
+Krav:
+
+- skriv til streamen `os`, ikke direkte til `std::cout`
+- returner `os`
+- ikke skriv linjeskift til slutt
 
 ## Når du har løst alt
 

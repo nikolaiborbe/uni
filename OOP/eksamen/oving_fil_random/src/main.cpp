@@ -3,6 +3,7 @@
 #include <cassert>
 #include <filesystem>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -96,6 +97,44 @@ void test_generate_random_measurements()
     assert(threw);
 }
 
+void test_measurement_series()
+{
+    MeasurementSeries series{"temperature", {18.5, 19.25, 20.0}};
+
+    assert(series.name() == "temperature");
+    assert(series.size() == 3);
+    assert(series.at(0) == 18.5);
+    assert(series.at(1) == 19.25);
+    assert(series.at(2) == 20.0);
+
+    MeasurementSeries copy{series};
+    series.set(0, -100.0);
+
+    assert(copy.name() == "temperature");
+    assert(copy.size() == 3);
+    assert(copy.at(0) == 18.5);
+    assert(series.at(0) == -100.0);
+
+    bool threw = false;
+    try {
+        (void)series.at(99);
+    } catch (const std::out_of_range&) {
+        threw = true;
+    }
+    assert(threw);
+
+    std::ostringstream out;
+    out << copy;
+    assert(out.str() == "temperature: 18.5, 19.25, 20");
+
+    const MeasurementSeries empty{"humidity", {}};
+    std::ostringstream empty_out;
+    empty_out << empty;
+    assert(empty.name() == "humidity");
+    assert(empty.size() == 0);
+    assert(empty_out.str() == "humidity:");
+}
+
 } // namespace
 
 int main()
@@ -106,6 +145,7 @@ int main()
         test_write_report();
         test_random_int();
         test_generate_random_measurements();
+        test_measurement_series();
     } catch (const std::exception& error) {
         std::cerr << "En test stoppet med exception: " << error.what() << '\n';
         return 1;
