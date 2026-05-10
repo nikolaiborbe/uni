@@ -9,16 +9,23 @@ y = target = 1
 b_1, b_2 = np.array([0, 0]), np.array([0])
 w = np.array([2,-1])
 
-def sigmoid(z: np.ndarray) -> Any:
+def Sigmoid(z: np.ndarray) -> Any:
     return 1 / (1 + np.exp(-z))
+
+def d_Sigmoid(z: np.ndarray) -> Any:
+    return np.exp(-z) / (1 + np.exp(-x))**2
 
 
 # First pass
 
-a_1 = sigmoid(np.einsum("jk, k->j", W, x) + b_1)
-a_L = sigmoid(np.einsum("j,j->", w, a_1) + b_2)
+z_1 = np.einsum("jk, k->j", W, x) + b_1
+a_1 = Sigmoid(z_1)
 
-# Calculate cost function
+z_L = np.einsum("j,j->", w, a_1) + b_2
+a_L = Sigmoid(z_L)
+
+δ_L = -(y - a_L)*d_Sigmoid(z_L)
+print(δ_L)
 
 
 

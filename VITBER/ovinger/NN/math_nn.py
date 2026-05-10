@@ -10,4 +10,3 @@ a1 = np.pow(z1, 2)
 
 z2 = w.T @ a1
 a2 = np.pow(z2, 2)
-this is a test to see how 
